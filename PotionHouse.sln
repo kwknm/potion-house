@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32901.215
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PotionHouse", "PotionHouse\PotionHouse.csproj", "{69EC0C8A-33AB-4F36-B87A-3EABCD69CD63}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PotionHouse.DataAccess", "PotionHouse.DataAccess\PotionHouse.DataAccess.csproj", "{478A6A57-FFB0-43B9-98CA-898E32F99B10}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{69EC0C8A-33AB-4F36-B87A-3EABCD69CD63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69EC0C8A-33AB-4F36-B87A-3EABCD69CD63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69EC0C8A-33AB-4F36-B87A-3EABCD69CD63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69EC0C8A-33AB-4F36-B87A-3EABCD69CD63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{478A6A57-FFB0-43B9-98CA-898E32F99B10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{478A6A57-FFB0-43B9-98CA-898E32F99B10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{478A6A57-FFB0-43B9-98CA-898E32F99B10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{478A6A57-FFB0-43B9-98CA-898E32F99B10}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {09A10557-788C-485C-8BD5-3B8485CEF1D0}
+	EndGlobalSection
+EndGlobal
