@@ -4,9 +4,9 @@ public class FilesService : IFilesService
 {
     private readonly IWebHostEnvironment _environment;
 
-    public const string StaticDirName = "static";
-    public const string ImagesDirName = "img";
-    public const long MaxImageSize = 4 * 1024 * 1024; // 4MB
+    private const string StaticDirName = "static";
+    private const string ImagesDirName = "img";
+    private const long MaxImageSize = 4 * 1024 * 1024; // 4MB
 
     public FilesService(IWebHostEnvironment environment)
     {
@@ -14,16 +14,19 @@ public class FilesService : IFilesService
         PrepareDirectories();
     }
 
-    public async Task<bool> UploadImageAsync(IFormFile file)
+    public async Task<string?> UploadImageAsync(IFormFile file)
     {
         if (file.Length > MaxImageSize)
-            return false;
+            return null;
 
-        var newFileName = Guid.NewGuid().ToString();
+        var newFileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
         var uploadPath = Path.Combine(_environment.WebRootPath, StaticDirName, ImagesDirName, newFileName);
-        using var stream = new FileStream(uploadPath, FileMode.Create);
+        
+        await using var stream = new FileStream(uploadPath, FileMode.Create);
         await file.CopyToAsync(stream);
-        return true;
+
+        var imagePath = Path.Combine(StaticDirName, ImagesDirName, newFileName);
+        return imagePath;
     }
 
     public async Task UploadMultipleImagesAsync(List<IFormFile> files)
