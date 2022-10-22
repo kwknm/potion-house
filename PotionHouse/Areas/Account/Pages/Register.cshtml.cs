@@ -1,38 +1,50 @@
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.ComponentModel.DataAnnotations;
 
 namespace PotionHouse.Areas.Account.Pages;
 
-public class RegisterModel : PageModel
+#nullable disable
+
+public class Register : PageModel
 {
-    [BindProperty, Required, StringLength(16, MinimumLength = 3)]
+    [BindProperty, DisplayName("Username"), StringLength(16, MinimumLength = 3)]
     public string UserName { get; set; }
-    [BindProperty, Required, EmailAddress]
+    
+    [BindProperty, DisplayName("Email"), EmailAddress] 
     public string Email { get; set; }
-    [BindProperty, Required]
+
+    [BindProperty, DataType(DataType.Password), DisplayName("Password")]
     public string Password { get; set; }
+
+    [BindProperty, DataType(DataType.Password), Compare(nameof(Password)), DisplayName("Confirm password")]
+    public string ConfirmPassword { get; set; }
 
     private readonly SignInManager<IdentityUser> _signInManager;
     private readonly UserManager<IdentityUser> _userManager;
 
-    public RegisterModel(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager)
+    public Register(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager)
     {
         _signInManager = signInManager;
         _userManager = userManager;
     }
 
-    public void OnGet()
+    public IActionResult OnGet()
     {
+        if (User.Identity!.IsAuthenticated)
+            return RedirectToPagePermanent("Index");
 
+        return Page();
     }
 
     public async Task<IActionResult> OnPostAsync()
     {
         if (!ModelState.IsValid)
             return Page();
-        var candidate = _userManager.FindByNameAsync(UserName);
+
+        var candidate = await _userManager.FindByNameAsync(UserName);
         if (candidate is not null)
         {
             ModelState.AddModelError(nameof(UserName), "Username is already in use");
@@ -40,20 +52,19 @@ public class RegisterModel : PageModel
         }
 
         var user = new IdentityUser();
-        await _userManager.SetUserNameAsync(user, UserName);
         await _userManager.SetEmailAsync(user, Email);
+        await _userManager.SetUserNameAsync(user, UserName);
 
         var result = await _userManager.CreateAsync(user, Password);
         if (!result.Succeeded)
         {
-            foreach(var error in result.Errors)
-            {
-                ModelState.AddModelError(string.Empty, error.Description);
-            }
+            ModelState.AddModelError(nameof(UserName), result.Errors.First().Description);
             return Page();
         }
 
+        await _signInManager.SignOutAsync();
         await _signInManager.SignInAsync(user, true);
-        return RedirectToPage("/");
+        
+        return RedirectToPagePermanent("Index");
     }
 }
