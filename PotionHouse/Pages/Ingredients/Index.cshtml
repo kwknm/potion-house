@@ -1,0 +1,27 @@
+@page "{id:int}"
+@model PotionHouse.Pages.Ingredients.Index
+
+@{
+    ViewData["Title"] = Model.Ingredient?.Title ?? "Ingredient not found";
+}
+
+<section style="max-width: 300px" class="w-100 m-auto">
+    @if (@Model.Ingredient is not null)
+    {
+        <div class="card">
+            <h5 class="card-header">Featured</h5>
+            <img class="card-img-top" src="~/@Model.Ingredient.Image" alt="@Model.Ingredient.Title"/>
+            <div class="card-body">
+                <h5 class="card-title">@Model.Ingredient.Title</h5>
+                <p class="card-text">@Model.Ingredient.Description</p>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="card">
+            <div class="card-body">Ingredient not found</div>
+            <div class="card-footer text-muted">Ingredients can disappear.</div>
+        </div>
+    }
+</section>
