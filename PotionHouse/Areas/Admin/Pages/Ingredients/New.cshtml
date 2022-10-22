@@ -1,0 +1,30 @@
+@page
+@model PotionHouse.Areas.Admin.Pages.Ingredients.New
+
+@{
+    ViewData["Title"] = "Create new Ingredient";
+}
+
+<section style="max-width: 300px" class="w-100 m-auto">
+    <h3>Create new Ingredient</h3>
+    <form method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label asp-for="Title" class="form-label"></label>
+            <input asp-for="Title" class="form-control">
+            <span asp-validation-for="Title" class="font-monospace text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label"></label>
+            <input asp-for="Description" class="form-control">
+            <span asp-validation-for="Description" class="font-monospace text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Image" class="form-label"></label>
+            <input asp-for="Image" class="form-control">
+            <span asp-validation-for="Image" class="font-monospace text-danger"></span>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-outline-primary">Create</button>
+        </div>
+    </form>
+</section>
