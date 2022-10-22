@@ -11,6 +11,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(x =>
     x.UseSqlite(builder.Configuration.GetConnectionString("SqliteConnection"));
 });
 
+builder.Services.AddAuthorization(x =>
+{
+    x.AddPolicy("admin", p => p.RequireRole("admin"));
+});
+
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(x =>
 {
     x.User.RequireUniqueEmail = true;
@@ -39,7 +44,8 @@ builder.Services.ConfigureApplicationCookie(x =>
 });
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages()
+    .AddRazorRuntimeCompilation();
 
 builder.Services.AddScoped<IPotionsRepository, PotionsRepository>();
 builder.Services.AddScoped<IPotionsService, PotionsService>();

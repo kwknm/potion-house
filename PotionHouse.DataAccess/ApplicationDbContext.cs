@@ -14,5 +14,4 @@ public class ApplicationDbContext : IdentityDbContext
 
     public DbSet<Potion> Potions { get; set; }
     public DbSet<Ingredient> Ingredients { get; set; }
-
 }
