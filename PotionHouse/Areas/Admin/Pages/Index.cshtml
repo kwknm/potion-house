@@ -1,0 +1,26 @@
+@page
+@model PotionHouse.Areas.Admin.Pages.Index
+
+@{
+    ViewData["Title"] = "Admin homepage";
+}
+
+<div class="d-flex gap-4">
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">Ingredients</h5>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><a asp-area="admin" asp-page="/ingredients/new">Create new</a></li>
+    </ul>
+  </div>
+
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">Rarities</h5>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><a asp-area="admin" asp-page="/rarities/new">Create new</a></li>
+    </ul>
+  </div>
+</div>
