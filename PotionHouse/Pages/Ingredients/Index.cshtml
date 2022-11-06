@@ -5,14 +5,19 @@
     ViewData["Title"] = Model.Ingredient?.Title ?? "Ingredient not found";
 }
 
-<section style="max-width: 300px" class="w-100 m-auto">
-    @if (@Model.Ingredient is not null)
+<section style="max-width: 300px" class="m-auto">
+    @if (Model.Ingredient is not null)
     {
-        <div class="card">
-            <h5 class="card-header">Featured</h5>
+        <div class="card" style="border: 2px solid @Model.Ingredient.Rarity.BgColorHex">
             <img class="card-img-top" src="~/@Model.Ingredient.Image" alt="@Model.Ingredient.Title"/>
             <div class="card-body">
-                <h5 class="card-title">@Model.Ingredient.Title</h5>
+                <h5 class="card-title">
+                    <span class="badge"
+                          style="background-color: @Model.Ingredient.Rarity.BgColorHex; color: @Model.Ingredient.Rarity.TextColorHex">
+                        @Model.Ingredient.Rarity.Title
+                    </span>
+                    &nbsp;@Model.Ingredient.Title
+                </h5>
                 <p class="card-text">@Model.Ingredient.Description</p>
             </div>
         </div>

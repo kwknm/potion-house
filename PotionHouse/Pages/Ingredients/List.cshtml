@@ -1,0 +1,29 @@
+@page
+@model PotionHouse.Pages.Ingredients.List
+
+@{
+    ViewData["Title"] = "Ingredients";
+}
+
+<section class="container justify-content-center d-flex align-content-start flex-wrap gap-4">
+    @foreach (var ingredient in Model.Ingredients)
+        {
+            <div class="card w-25" style="border: 2px solid @ingredient.Rarity.BgColorHex">
+                <img class="card-img-top" src="~/@ingredient.Image" alt="@ingredient.Title"/>
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <span class="badge"
+                              style="background-color: @ingredient.Rarity.BgColorHex; color: @ingredient.Rarity.TextColorHex">
+                            @ingredient.Rarity.Title
+                        </span>
+                        &nbsp;@ingredient.Title
+                    </h5>
+                    <p class="card-text">@ingredient.Description</p>
+                </div>
+            </div>
+        }
+        @if (Model.Ingredients.Count == 0)
+        {
+            <h3>No Ingredients to display.</h3>
+        }
+</section>
