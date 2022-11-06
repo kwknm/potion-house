@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using PotionHouse.DataAccess.Entities;
 
 namespace PotionHouse.Areas.Account.Pages;
 
@@ -15,10 +16,10 @@ public class LoginModel : PageModel
     public bool RememberMe { get; set; } = true;
     
 
-    private readonly UserManager<IdentityUser> _userManager;
-    private readonly SignInManager<IdentityUser> _signInManager;
+    private readonly UserManager<ApplicationUser> _userManager;
+    private readonly SignInManager<ApplicationUser> _signInManager;
 
-    public LoginModel(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+    public LoginModel(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
     {
         _userManager = userManager;
         _signInManager = signInManager;

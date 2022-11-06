@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using PotionHouse.DataAccess.Entities;
 
 namespace PotionHouse.Areas.Account.Pages;
 
@@ -22,10 +23,10 @@ public class Register : PageModel
     [BindProperty, DataType(DataType.Password), Compare(nameof(Password)), DisplayName("Confirm password")]
     public string ConfirmPassword { get; set; }
 
-    private readonly SignInManager<IdentityUser> _signInManager;
-    private readonly UserManager<IdentityUser> _userManager;
+    private readonly SignInManager<ApplicationUser> _signInManager;
+    private readonly UserManager<ApplicationUser> _userManager;
 
-    public Register(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager)
+    public Register(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
     {
         _signInManager = signInManager;
         _userManager = userManager;
@@ -51,9 +52,14 @@ public class Register : PageModel
             return Page();
         }
 
-        var user = new IdentityUser();
+        var user = new ApplicationUser
+        {
+            CreatedAt = new DateTimeOffset().UtcDateTime,
+            
+        };
         await _userManager.SetEmailAsync(user, Email);
         await _userManager.SetUserNameAsync(user, UserName);
+        await _userManager.SetLockoutEnabledAsync(user, false);
 
         var result = await _userManager.CreateAsync(user, Password);
         if (!result.Succeeded)
