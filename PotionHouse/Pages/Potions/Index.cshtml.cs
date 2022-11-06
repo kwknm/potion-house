@@ -1,41 +1,27 @@
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PotionHouse.DataAccess.Entities;
+using PotionHouse.DataAccess.Repositories.Abstractions;
 using PotionHouse.Services;
+using PotionHouse.Services.Abstractions;
 
 namespace PotionHouse.Pages.Potions;
 
-public class IndexModel : PageModel
+public class Index : PageModel
 {
-    [BindProperty]
-    public List<Potion> Potions { get; set; }
+    public Potion? Potion { get; set; }
 
     private readonly IPotionsService _potionsService;
-    private readonly IIngredientsService _ingredientsService;
+    private readonly IInventoryRepository _inventoryRepository;
 
-    public IndexModel(IPotionsService potionsService, IIngredientsService ingredientsService)
+    public Index(IInventoryRepository inventoryRepository, IPotionsService potionsService)
     {
+        _inventoryRepository = inventoryRepository;
         _potionsService = potionsService;
-        _ingredientsService = ingredientsService;
     }
 
-    public async Task OnGet()
+    public async Task OnGetAsync(int id)
     {
-        // todo: get a list of potions (and recipes for them)
-        var potions = await _potionsService.GetPotionsAsync();
-        Potions = potions;
-    }
-
-    public async Task OnPost()
-    {
-        var ing = await _ingredientsService.GetByIdAsync(1);
-
-        var potion = await _potionsService.CreateAsync(
-            title: "Relic Struct",
-            description: "Some struct",
-            preparationTime: TimeSpan.FromMinutes(3),
-            preparationCost: 100M,
-            recipe: new List<Ingredient>() { ing, ing });
+        Potion = await _potionsService.GetByIdAsync(id);
     }
 }

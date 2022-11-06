@@ -1,8 +1,11 @@
-using DataAccess.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PotionHouse.DataAccess;
+using PotionHouse.DataAccess.Entities;
+using PotionHouse.DataAccess.Repositories;
+using PotionHouse.DataAccess.Repositories.Abstractions;
 using PotionHouse.Services;
+using PotionHouse.Services.Abstractions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +19,7 @@ builder.Services.AddAuthorization(x =>
     x.AddPolicy("admin", p => p.RequireRole("admin"));
 });
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>(x =>
+builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(x =>
 {
     x.User.RequireUniqueEmail = true;
     x.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -43,15 +46,19 @@ builder.Services.ConfigureApplicationCookie(x =>
     x.ReturnUrlParameter = "returnUrl";
 });
 
+builder.Services.AddRouting(x => x.LowercaseUrls = true);
+
 // Add services to the container.
 builder.Services.AddRazorPages()
     .AddRazorRuntimeCompilation();
 
-builder.Services.AddScoped<IPotionsRepository, PotionsRepository>();
-builder.Services.AddScoped<IPotionsService, PotionsService>();
-builder.Services.AddScoped<IIngredientsRepository, IngredientsRepository>();
 builder.Services.AddScoped<IIngredientsService, IngredientsService>();
 builder.Services.AddScoped<IFilesService, FilesService>();
+builder.Services.AddScoped<IPotionsService, PotionsService>();
+builder.Services.AddScoped<IRarityService, RarityService>();
+
+// Add DA
+builder.Services.AddDataAccess();
 
 var app = builder.Build();
 

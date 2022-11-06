@@ -1,18 +1,27 @@
-﻿@page
-@model PotionHouse.Pages.Potions.IndexModel
+@page "{id:int}"
+@model PotionHouse.Pages.Potions.Index
+
 @{
-    ViewData["Title"] = "Potions";
+    ViewData["Title"] = "";
 }
 
-@if (Model.Potions.Count != 0)
-{
-    @foreach(var potion in Model.Potions){
-        <article>
-            <h3>@potion.Title</h3>
-        </article>
+<section style="max-width: 300px" class="w-auto m-auto">
+    @if (@Model.Potion is not null)
+    {
+        <div class="card">
+            <h5 class="card-header">Featured</h5>
+            <img class="card-img-top" src="~/@Model.Potion.Image" alt="@Model.Potion.Title"/>
+            <div class="card-body">
+                <h5 class="card-title">@Model.Potion.Title</h5>
+                <p class="card-text">@Model.Potion.Description</p>
+            </div>
+        </div>
     }
-}
-else 
-{
-    <h3>No potions to display.</h3>
-}
+    else
+    {
+        <div class="card">
+            <div class="card-body">Ingredient not found</div>
+            <div class="card-footer text-muted">Ingredients can disappear.</div>
+        </div>
+    }
+</section>

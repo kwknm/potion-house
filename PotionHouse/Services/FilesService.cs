@@ -1,4 +1,6 @@
-﻿namespace PotionHouse.Services;
+﻿using PotionHouse.Services.Abstractions;
+
+namespace PotionHouse.Services;
 
 public class FilesService : IFilesService
 {

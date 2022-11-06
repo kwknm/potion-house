@@ -20,12 +20,12 @@
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-page="/Potions/Index">Potions</a>
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Potions/List">Potions</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-page="/Ingredients/Index">Ingredients</a>
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Ingredients/List">Ingredients</a>
                     </li>
-                    @if (!User.Identity.IsAuthenticated)
+                    @if (!User.Identity!.IsAuthenticated)
                     {
                         <li class="nav-item ms-auto">
                             <a class="nav-link text-dark" asp-area="account" asp-page="/login">Login</a>
@@ -37,10 +37,22 @@
                     else
                     {
                         <li class="nav-item ms-auto">
-                            <a class="nav-link text-dark" asp-page="/profile">@User.Identity.Name</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="account" asp-page="/logout">Log out</a>
+                            <div class="dropdown">
+                              <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                @User.Identity.Name
+                              </button>
+                              <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" asp-page="/profile">Profile</a></li>
+                                  <li><a class="dropdown-item" asp-area="" asp-page="/Inventory/Index">Inventory</a></li>
+                                  @if (User.IsInRole("admin"))
+                                  {
+                                      <li><hr class="dropdown-divider"></li>
+                                      <li><strong><a class="dropdown-item" asp-area="admin" asp-page="/index">Admin</a></strong></li>
+                                  }
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-danger" asp-area="account" asp-page="/logout">Log out</a></li>
+                              </ul>
+                            </div>
                         </li>
                     }
                 </ul>
