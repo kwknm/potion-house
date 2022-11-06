@@ -1,0 +1,36 @@
+@page
+@model PotionHouse.Areas.Admin.Pages.Rarities.New
+
+@{
+    ViewData["Title"] = "Create new Rarity";
+}
+
+<section style="max-width: 300px" class="w-100 m-auto">
+    <h3>Create new Rarity</h3>
+    @if (Model.Message is not null)
+    {
+        <div class="alert alert-primary" role="alert">
+            @Model.Message
+        </div>
+    }
+    <form method="post" >
+        <div class="mb-3">
+            <label asp-for="Title" class="form-label"></label>
+            <input asp-for="Title" class="form-control">
+            <span asp-validation-for="Title" class="font-monospace text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="BgColor" class="form-label"></label>
+            <input type="color" asp-for="BgColor" class="form-control">
+            <span asp-validation-for="BgColor" class="font-monospace text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="TextColor" class="form-label"></label>
+            <input type="color" asp-for="TextColor" class="form-control">
+            <span asp-validation-for="TextColor" class="font-monospace text-danger"></span>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-outline-primary">Create</button>
+        </div>
+    </form>
+</section>
