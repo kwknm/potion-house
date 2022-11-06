@@ -19,6 +19,10 @@
             <span asp-validation-for="Description" class="font-monospace text-danger"></span>
         </div>
         <div class="mb-3">
+            <label asp-for="RarityId" class="form-label"></label>
+            <select class="form-select" name="rarityId" asp-for="RarityId" asp-items="Model.Rarities"></select>
+        </div>
+        <div class="mb-3">
             <label asp-for="Image" class="form-label"></label>
             <input asp-for="Image" class="form-control">
             <span asp-validation-for="Image" class="font-monospace text-danger"></span>
