@@ -8,7 +8,7 @@ public interface IRepository<T> where T : BaseEntity
     public T Add(T entity);
     public Task<List<T>> GetAllAsync(int limit = 5, int offset = 0);
     public Task<T?> GetByIdAsync(int id);
-    public Task<T?> FindByConditionAsync(Expression<Func<T, bool>> predicate);
+    public Task<T?> FindByConditionAsync(Expression<Func<T, bool>> predicate, int limit = 30, int offset = 0);
     public void Remove(T entity);
     public void RemoveRange(IEnumerable<T> entities);
     public Task SaveChangesAsync();

@@ -1,0 +1,40 @@
+@page
+@model PotionHouse.Areas.Admin.Pages.Users.Search
+
+@{
+    ViewData["Title"] = "Search for Users";
+}
+
+
+<section style="max-width: 400px" class=" m-auto">
+    <h3>Find Users by Username</h3>
+    <form method="post">
+        <div class="mb-3">
+            <label asp-for="UserName" class="form-label"></label>
+            <input asp-for="UserName" class="form-control">
+        </div>
+        <div>
+            <button type="submit" class="btn btn-outline-primary">Search</button>
+        </div>
+    </form>
+
+    @if (Model.Users is not null)
+    {
+        <h5 class="mt-3">Results for '@Model.UserName':</h5>
+        <div class="list-group">
+            @foreach (var user in Model.Users)
+            {
+                <a asp-area="admin" asp-page="/users/details" asp-route-id="@user.Id"
+                   class="list-group-item list-group-item-action">
+                    <div>@user.UserName | @user.Email</div>
+                    <div>Id: @user.Id</div>
+                    <div>Created at: @user.CreatedAt</div>
+                </a>
+            }
+            @if (Model.Users.Count == 0)
+            {
+                <li class="list-group-item disabled" aria-disabled="true">Not found</li>
+            }
+        </div>
+    }
+</section>

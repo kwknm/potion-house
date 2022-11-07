@@ -2,7 +2,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PotionHouse.DataAccess.Dtos;
-using PotionHouse.DataAccess.Repositories.Abstractions;
+using PotionHouse.Services.Abstractions;
 
 namespace PotionHouse.Pages.Inventory;
 
@@ -12,17 +12,17 @@ public class Index : PageModel
     public List<PotionWithAmount>? PotionsWithAmounts { get; set; }
     public List<IngredientWithAmount>? IngredientsWithAmounts { get; set; }
 
-    private readonly IInventoryRepository _inventoryRepository;
+    private readonly IInventoryService _inventoryService;
 
-    public Index(IInventoryRepository inventoryRepository)
+    public Index(IInventoryService inventoryService)
     {
-        _inventoryRepository = inventoryRepository;
+        _inventoryService = inventoryService;
     }
 
     public async Task OnGetAsync()
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        IngredientsWithAmounts = await _inventoryRepository.GetUserIngredientsAsync(userId);
-        PotionsWithAmounts = await _inventoryRepository.GetUserPotionsAsync(userId);
+        IngredientsWithAmounts = await _inventoryService.GetUserIngredientsAsync(userId);
+        PotionsWithAmounts = await _inventoryService.GetUserPotionsAsync(userId);
     }
 }

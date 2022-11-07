@@ -1,9 +1,6 @@
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PotionHouse.DataAccess;
 using PotionHouse.DataAccess.Entities;
-using PotionHouse.DataAccess.Repositories;
-using PotionHouse.DataAccess.Repositories.Abstractions;
 using PotionHouse.Services;
 using PotionHouse.Services.Abstractions;
 
@@ -56,6 +53,9 @@ builder.Services.AddScoped<IIngredientsService, IngredientsService>();
 builder.Services.AddScoped<IFilesService, FilesService>();
 builder.Services.AddScoped<IPotionsService, PotionsService>();
 builder.Services.AddScoped<IRarityService, RarityService>();
+builder.Services.AddScoped<IRolesService, RolesService>();
+builder.Services.AddScoped<IUsersService, UsersService>();
+builder.Services.AddScoped<IInventoryService, InventoryService>();
 
 // Add DA
 builder.Services.AddDataAccess();

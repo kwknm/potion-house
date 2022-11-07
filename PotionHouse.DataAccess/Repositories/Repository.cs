@@ -17,8 +17,8 @@ public class Repository<T> : IRepository<T>
 
     public T Add(T entity)
     {
-        var a = _context.Set<T>().Add(entity);
-        return a.Entity;
+        var result = _context.Set<T>().Add(entity);
+        return result.Entity;
     }
 
     public async Task<List<T>> GetAllAsync(int limit = 15, int offset = 0)
@@ -31,9 +31,12 @@ public class Repository<T> : IRepository<T>
         return await _context.Set<T>().FindAsync(id);
     }
 
-    public async Task<T?> FindByConditionAsync(Expression<Func<T, bool>> predicate)
+    public async Task<T?> FindByConditionAsync(Expression<Func<T, bool>> predicate, int limit = 30, int offset = 0)
     {
-        return await _context.Set<T>().AsNoTracking().FirstOrDefaultAsync(predicate);
+        return await _context.Set<T>().AsNoTracking()
+            .Skip(offset)
+            .Take(limit)
+            .FirstOrDefaultAsync(predicate);
     }
 
     public void Remove(T entity)

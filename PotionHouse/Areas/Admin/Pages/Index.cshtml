@@ -6,21 +6,56 @@
 }
 
 <div class="d-flex gap-4">
-  <div class="card" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">Ingredients</h5>
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Ingredients</h5>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <a asp-area="admin" asp-page="/ingredients/new">Create new</a>
+            </li>
+        </ul>
     </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item"><a asp-area="admin" asp-page="/ingredients/new">Create new</a></li>
-    </ul>
-  </div>
 
-  <div class="card" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">Rarities</h5>
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Rarities</h5>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <a asp-area="admin" asp-page="/rarities/new">Create new</a>
+            </li>
+        </ul>
     </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item"><a asp-area="admin" asp-page="/rarities/new">Create new</a></li>
-    </ul>
-  </div>
+
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Users</h5>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <a asp-area="admin" asp-page="/users/roles/add">Add User to Role</a>
+            </li>
+            <li class="list-group-item">
+                <a asp-area="admin" asp-page="/users/roles/remove">Remove User from Role</a>
+            </li>
+            <li class="list-group-item">
+                <a asp-area="admin" asp-page="/users/roles/index">Retrieve User Roles</a>
+            </li>
+            <li class="list-group-item">
+                <a asp-area="admin" asp-page="/users/details">Retrieve User Information</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Roles</h5>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <a asp-area="admin" asp-page="/roles/new">Create new</a>
+            </li>
+        </ul>
+    </div>
 </div>

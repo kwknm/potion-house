@@ -6,7 +6,7 @@ namespace PotionHouse.DataAccess.Entities;
 
 public class ApplicationUser : IdentityUser
 {
-    public DateTimeOffset CreatedAt { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     public ICollection<UserPotion> Potions { get; set; }
     public ICollection<UserIngredients> Ingredients { get; set; }

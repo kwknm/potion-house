@@ -44,7 +44,7 @@
                               <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" asp-page="/profile">Profile</a></li>
                                   <li><a class="dropdown-item" asp-area="" asp-page="/Inventory/Index">Inventory</a></li>
-                                  @if (User.IsInRole("admin"))
+                                  @if (User.IsInRole("Admin"))
                                   {
                                       <li><hr class="dropdown-divider"></li>
                                       <li><strong><a class="dropdown-item" asp-area="admin" asp-page="/index">Admin</a></strong></li>

@@ -52,11 +52,7 @@ public class Register : PageModel
             return Page();
         }
 
-        var user = new ApplicationUser
-        {
-            CreatedAt = new DateTimeOffset().UtcDateTime,
-            
-        };
+        var user = new ApplicationUser();
         await _userManager.SetEmailAsync(user, Email);
         await _userManager.SetUserNameAsync(user, UserName);
         await _userManager.SetLockoutEnabledAsync(user, false);

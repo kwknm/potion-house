@@ -16,10 +16,10 @@
             </button>
         </h2>
         <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
-            <div class="accordion-body">
+            <div class="accordion-body d-flex gap-3">
                 @if (Model.PotionsWithAmounts.Count == 0)
                 {
-                    <p class="lead">There are no Potions in your Inventory</p>
+                    <div class="lead">There are no Potions in your Inventory</div>
                 }
                 @foreach (var potion in Model.PotionsWithAmounts)
                 {
@@ -49,7 +49,7 @@
             <div class="accordion-body d-flex gap-3">
                 @if (Model.IngredientsWithAmounts.Count == 0)
                 {
-                    <p class="lead">There are no Ingredients in your Inventory</p>
+                    <div class="lead">There are no Ingredients in your Inventory</div>
                 }
                 @foreach (var ingredient in Model.IngredientsWithAmounts)
                 {
